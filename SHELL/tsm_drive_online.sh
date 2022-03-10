@@ -16,7 +16,7 @@
 # IDENTIFIANTS TSM
 IDTSM=""
 MDPTSM=""
-# STATUTS DES DRIVES
+# STATUT DES DRIVES
 STATUS=""
 # LIBRAIRIE CORRSPONDANTE AU DRIVE A TRAITER
 LIBRARY=""
@@ -69,7 +69,7 @@ else
         DRIVE=$(echo "$line" | awk '{print $2}')
 
         # PASSAGE ONLINE DU DRIVE
-        echo -e "\nPassage ONLINE du drive $DRIVE de la librairie $LIBRARY\n"
+        echo -e "\nPASSAGE ONLINE DU $DRIVE DE LA LIBRAIRIE $LIBRARY\n"
         tsmcmd update drive $LIBRARY $DRIVE online=yes
         echo -e "UPDATE EN COURS\n"
 
