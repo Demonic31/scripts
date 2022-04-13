@@ -63,3 +63,16 @@ done
 ########################
 ##    PROGRAMME       ##
 ########################
+
+
+# MQINFO de la file MQ
+echo "\nMQINFO de la file EDS.OCB.01 \n"
+su - mqm -c "MQINFO.exe EDS.OCB.01" > $ficLogOCB
+
+
+
+# Récupération des valeurs (nb de message, nb de message max, taux)
+echo "\nRECUPERATION DES VALEURS \n"
+nbMess=`grep "Number of messages in queue" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
+nbMax=`grep "Maximum number" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
+tauxRemp=`grep "ratio" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
