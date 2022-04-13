@@ -64,11 +64,18 @@ done
 ##    PROGRAMME       ##
 ########################
 
+# https://www.ibm.com/docs/en/ibm-mq/7.5?topic=reference-mqsc-commands
+# https://www.ibm.com/docs/en/ibm-mq/7.5?topic=commands-display-qstatus
+# https://www.ibm.com/docs/en/ibm-mq/7.5?topic=reference-building-command-scripts
+
+
+# AGE : runmqsc | DISPLAY QSTATUS(DA01.QL.EDS.OCB.01) MSGAGE | END
+# POUR CALCUL % FILE : runmqsc | DISPLAY QUEUE(DA01.QL.EDS.OCB.01) MAXDEPTH,CURDEPTH | END
+
 
 # MQINFO de la file MQ
 echo "\nMQINFO de la file EDS.OCB.01 \n"
 su - mqm -c "MQINFO.exe EDS.OCB.01" > $ficLogOCB
-
 
 
 # Récupération des valeurs (nb de message, nb de message max, taux)
@@ -76,3 +83,8 @@ echo "\nRECUPERATION DES VALEURS \n"
 nbMess=`grep "Number of messages in queue" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
 nbMax=`grep "Maximum number" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
 tauxRemp=`grep "ratio" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
+
+
+echo "dis chstatus(CSQ$i.MQDA01.SRV)" | runmqsc| tee -a /home/mqm/zos/verif_channel_srv.log
+
+MQBROWSE.exe MQZE01 LAN.CTL -a | grep -E "Send date|Send time|(CPNAME=)[A-Z0-9_]*"
