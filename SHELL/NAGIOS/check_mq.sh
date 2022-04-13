@@ -69,13 +69,13 @@ done
 # https://www.ibm.com/docs/en/ibm-mq/7.5?topic=reference-building-command-scripts
 
 
-# AGE : runmqsc | DISPLAY QSTATUS(DA01.QL.EDS.OCB.01) MSGAGE | END
-# POUR CALCUL % FILE : runmqsc | DISPLAY QUEUE(DA01.QL.EDS.OCB.01) MAXDEPTH,CURDEPTH | END
+# AGE : runmqsc | DISPLAY QSTATUS(name) MSGAGE | END
+# POUR CALCUL % FILE : runmqsc | DISPLAY QUEUE(name) MAXDEPTH,CURDEPTH | END
 
 
 # MQINFO de la file MQ
-echo "\nMQINFO de la file EDS.OCB.01 \n"
-su - mqm -c "MQINFO.exe EDS.OCB.01" > $ficLogOCB
+echo "\nMQINFO de la file queue \n"
+su - mqm -c "MQINFO.exe queue" > $ficLogOCB
 
 
 # Récupération des valeurs (nb de message, nb de message max, taux)
@@ -85,6 +85,6 @@ nbMax=`grep "Maximum number" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
 tauxRemp=`grep "ratio" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
 
 
-echo "dis chstatus(CSQ$i.MQDA01.SRV)" | runmqsc| tee -a /home/mqm/zos/verif_channel_srv.log
+echo "dis chstatus(nmae)" | runmqsc
 
-MQBROWSE.exe MQZE01 LAN.CTL -a | grep -E "Send date|Send time|(CPNAME=)[A-Z0-9_]*"
+MQBROWSE.exe QMan Queue -a | grep -E "Send date|Send time|(CPNAME=)[A-Z0-9_]*"
