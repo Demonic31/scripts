@@ -75,7 +75,7 @@ done
 
 # MQINFO de la file MQ
 echo "\nMQINFO de la file queue \n"
-su - mqm -c "MQINFO.exe queue" > $ficLogOCB
+su - mqm -c "MQINFO.exe <name_Queue>" > $ficLogOCB
 
 
 # Récupération des valeurs (nb de message, nb de message max, taux)
@@ -85,6 +85,6 @@ nbMax=`grep "Maximum number" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
 tauxRemp=`grep "ratio" $ficLogOCB | sed 's/.* = (//g' | sed 's/).*//g'`
 
 
-echo "dis chstatus(nmae)" | runmqsc
+echo "dis chstatus(name)" | runmqsc
 
-MQBROWSE.exe QMan Queue -a | grep -E "Send date|Send time|(CPNAME=)[A-Z0-9_]*"
+MQBROWSE.exe <name_QManager> <name_Queue> -a | grep -E "Send date|Send time|(CPNAME=)[A-Z0-9_]*"
