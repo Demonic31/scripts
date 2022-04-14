@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # TITRE remove_node_tsm.sh
 # DESCRIPTION :
@@ -18,7 +18,7 @@
 _HOME_PATH="$(cd $(dirname $0) && pwd)"
 _SCRIPT_PATH="$_HOME_PATH/$(basename $0)"
 
-list="$_HOME_PATH/listnode.txt"
+LIST="$_HOME_PATH/listnode.txt"
 
 . $_HOME_PATH/environment
 
@@ -27,7 +27,7 @@ list="$_HOME_PATH/listnode.txt"
 #########################################
 
 tsmcmd(){
-dsmadmc -id=$id -pa=$passwd -datao=yes $*
+dsmadmc -id=$ID -pa=$PASSWD -datao=yes $*
 return $?
 }
 
@@ -35,7 +35,7 @@ return $?
 ##         PROGRAMME PRINCIPAL         ##
 #########################################
 
-for node in $(cat $list)
+for node in $(cat $LIST)
 do
 wait 5s
         echo " "
