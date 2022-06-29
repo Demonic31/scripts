@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # TITRE remove_node_tsm.sh
-# DESCRIPTION :
+# DESCRIPTION : Suppression de nodes TSM
 # HISTORIQUE :
 # T |  Date      |  Auteur                      |  Description
 #---+------------+------------------------------+------------------------------------
